@@ -12,10 +12,12 @@
   --radius: 18px;
   --radius-sm: 12px;
   --max: 1120px;
+  --header-offset: 60px;
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+html { scroll-padding-top: var(--header-offset); }
 body {
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   background: radial-gradient(1200px 700px at 20% 10%, rgba(110, 168, 255, 0.22), transparent 55%),
