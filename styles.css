@@ -235,16 +235,13 @@ a:hover { text-decoration: underline; }
 .list li { margin: 8px 0; }
 
 .video-wrap {
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.04);
-  padding: 14px;
+  max-width: 720px;   /* try 640 / 720 / 800 */
+  margin: 0 auto;
 }
+
 .video {
   width: 100%;
-  border-radius: 12px;
-  display: block;
-  background: rgba(0, 0, 0, 0.35);
+  height: auto;
 }
 
 .signup {
@@ -303,4 +300,70 @@ input:focus {
   .signup { grid-template-columns: 1fr; }
   .nav a { display: none; }
   .nav a.btn { display: inline-flex; }
+}
+
+
+/* --- Video section: text + video side-by-side --- */
+.video-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.video-text h2 {
+  margin: 0 0 10px;
+}
+
+.video-text .section-sub {
+  margin: 0 0 14px;
+}
+
+/* Constrain video size */
+.video-wrap {
+  margin: 0;
+}
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  max-width: 520px; /* controls how big the video appears */
+  margin-left: auto; /* pushes it toward the right */
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 14px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* The actual video (white UI background looks intentional) */
+.video-frame .video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+/* PNG mask overlay */
+.video-frame .video-mask {
+  position: absolute;
+  inset: 14px; /* matches padding above; keeps mask aligned */
+  width: calc(100% - 28px);
+  height: calc(100% - 28px);
+  object-fit: cover;      /* use contain if your mask has margins */
+  pointer-events: none;   /* so video controls still clickable */
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 920px) {
+  .video-section {
+    grid-template-columns: 1fr;
+  }
+
+  .video-frame {
+    margin: 0 auto;
+    max-width: 520px;
+  }
 }
