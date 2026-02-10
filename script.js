@@ -36,4 +36,23 @@
     }
     // If action points to a real endpoint (Formspree), the browser submits normally.
   });
+
+  const demoVideo = document.getElementById("demoVideo");
+  if (demoVideo) {
+    const seekToFirstFrame = () => {
+      try {
+        demoVideo.currentTime = 0.01;
+        demoVideo.pause();
+      } catch (_) {
+        // ignore seek errors (e.g., not enough data yet)
+      }
+    };
+
+    if (demoVideo.readyState >= 2) {
+      seekToFirstFrame();
+    } else {
+      demoVideo.addEventListener("loadedmetadata", seekToFirstFrame, { once: true });
+      demoVideo.addEventListener("loadeddata", seekToFirstFrame, { once: true });
+    }
+  }
 })();
